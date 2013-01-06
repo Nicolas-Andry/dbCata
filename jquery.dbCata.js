@@ -13,10 +13,12 @@
 						return false;
 					}
 					var auteur= info.results.bindings[0]
+					// Ajout du titre 
 					if (typeof auteur!== "undefined" ){
 						var divBio=$('<div>').addClass("liensPlusAuteur");
-						divBio.append($('<h4>').html(auteur.nom.value));
+						divBio.append($('<h3>').html(auteur.nom.value));
 					}
+					//Ajout de l'image
 					if (typeof auteur.image!== "undefined" ){
 						var imgA = $("<img>").attr("src",auteur.image.value.replace("200px","100px")).addClass('bio');
 						divBio.append(imgA);
@@ -53,6 +55,7 @@
 								}
 							}
 						}
+						// Ajout du conteneur pour les prix
 						if (arrLaureate.length>0){
 							var divPrix = $('<div class="prixContainer">');
 							var lPrix=$("<ul>");
@@ -70,44 +73,14 @@
 							divBio.append(divPrix);
 						}
 					}
+					//Ajout de la biographie
 					if (typeof auteur.abstract!== "undefined" ){
 						if (typeof auteur.source!== "undefined" )
-						var infoDiv=$('<h5>Biographie</h5><div class="summary hide"><p>'+htmlDecode(auteur.abstract.value)+'</p>&nbsp;Source : <a target="_blank" class="lienwiki" href="'+ auteur.source.value +'">Wikipédia</a></div>');
+						var infoDiv=$('<h5>Biographie</h5><div class="summary"><p>'+htmlDecode(auteur.abstract.value)+'</p>&nbsp;Source : <a target="_blank" class="lienwiki" href="'+ auteur.source.value +'">Wikipédia</a></div>');
 						else
-						var infoDiv=$('<h5>Biographie</h5><div class="summary hide"><p>'+htmlDecode(auteur.abstract.value)+'</p></div>');
-						var cacheDiv=$('<div class="cache">')
-						infoDiv.hover(
-						function () {
-							$(this).removeClass("hide");
-							$(this).addClass("show");
-							cacheDiv.addClass("displayNone");
-							cacheDiv.removeClass("displayBlock");
-						},
-						function () {
-							$(this).removeClass("show");
-							$(this).addClass("hide");
-							cacheDiv.removeClass("displayNone");
-							cacheDiv.addClass("displayBlock");
-						}
-						);
-						cacheDiv.hover(
-						function () {
-							infoDiv.removeClass("hide");
-							infoDiv.addClass("show");
-							cacheDiv.addClass("displayNone");
-							cacheDiv.removeClass("displayBlock");
-						},
-						function () {
-							infoDiv.removeClass("show");
-							infoDiv.addClass("hide");
-							cacheDiv.removeClass("displayNone");
-							cacheDiv.addClass("displayBlock");
-						}
-						);
+						var infoDiv=$('<h5>Biographie</h5><div class="summary"><p>'+htmlDecode(auteur.abstract.value)+'</p></div>');
 						var containerDiv=$('<div class="infoContainer">');
-						containerDiv.append(infoDiv);
-						containerDiv.append(cacheDiv);
-						divBio.append(containerDiv);
+						divBio.append(infoDiv);
 					}
 					if (typeof auteur.image!== "undefined" || typeof auteur.abstract!== "undefined" ){
 						globalSettings.o.append(divBio);

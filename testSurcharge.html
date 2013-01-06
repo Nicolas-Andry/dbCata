@@ -1,0 +1,51 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<title>dbpédia : Biographie Milan Kundera</title>
+<meta http-equiv="Content-Type" content="text/html;
+charset=utf-8">
+<script src="jquery.js" type="text/javascript"></script>
+<script src="jquery.dbCata.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+$(document).ready(function() {
+	$('#auteur').dbCata({
+		displayBio : function(info) {
+				if (typeof info.results!== "undefined" ) {
+					if (info.results.bindings.length==0) {
+						return false;
+					}
+					var auteur= info.results.bindings[0]
+					// Ajout du titre 
+					if (typeof auteur!== "undefined" ){
+						var divBio=$('<div>').addClass("liensPlusAuteur");
+						divBio.append($('<h3>').html(auteur.nom.value));
+					}
+					//Ajout de l'image
+					if (typeof auteur.image!== "undefined" ){
+						var imgA = $("<img>").attr("src",auteur.image.value.replace("200px","100px")).addClass('bio');
+						divBio.append(imgA);
+					}
+					//Ajout de la biographie
+					if (typeof auteur.abstract!== "undefined" ){
+						if (typeof auteur.source!== "undefined" )
+						var infoDiv=$('<h5>Biographie</h5><div class="summary"><p>'+auteur.abstract.value+'</p>&nbsp;Source : <a target="_blank" class="lienwiki" href="'+ auteur.source.value +'">Wikipédia</a></div>');
+						else
+						var infoDiv=$('<h5>Biographie</h5><div class="summary"><p>'+auteur.abstract.value+'</p></div>');
+						var containerDiv=$('<div class="infoContainer">');
+						divBio.append(infoDiv);
+					}
+					if (typeof auteur.image!== "undefined" || typeof auteur.abstract!== "undefined" ){
+						$('#auteur').append(divBio);
+					}
+				}
+		   }
+	});
+	$('#auteur').dbCata("info","Pascal Bruckner");
+});
+</script>
+</head>
+<body>
+	<div id="auteur"/>
+</body>
+</html>
