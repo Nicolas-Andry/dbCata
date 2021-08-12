@@ -108,12 +108,12 @@
 							divAuteur.append(img);
 						}
 						if (typeof auteur.abstract!== "undefined" ){
-							var shortText = jQuery.trim(htmlDecode(auteur.abstract.value)).substring(0, 200).split(" ").slice(0, -1).join(" ") + "...";
+							var shortText = jQuery.trim(htmlDecode(auteur.abstract.value));
 							var resume=$("<p>").addClass("resume").html(shortText);
 							divAuteur.append(resume);
 						}
-						var aPrix=$("<a>").attr("href","/medias/search.aspx?Instance=EXPLOITATION&SC=DEFAULT&QUERY=Author_idx:"+auteur.nom.value);
-						aPrix=aPrix.html("Voir les oeuvres de " + auteur.nom.value)
+						var aPrix=$("<a>").attr("href",auteur.source.value);
+						aPrix=aPrix.html("Page wikipédia : " + auteur.nom.value)
 						divAuteur.append(aPrix);
 						globalSettings.o.append(divAuteur);
 					}
