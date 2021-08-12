@@ -124,7 +124,8 @@
 		debug ("settins loaded");
     }, 
 	prix : function (sPrix) {
-		var sparqlQuery ='PREFIX db:<http://fr.dbpedia.org/resource/>PREFIX dbo: <http://dbpedia.org/ontology/>PREFIX dcterms:<http://purl.org/dc/terms/>PREFIX cat:<http://fr.dbpedia.org/resource/Catégorie:>SELECT DISTINCT ?nom,?abstract,?image,?source WHERE { ?auteur dcterms:subject cat:' + sPrix +'.?auteur rdfs:label ?nom.OPTIONAL {?auteur dbo:thumbnail ?image.} OPTIONAL {?auteur foaf:isPrimaryTopicOf ?source} OPTIONAL {?auteur rdfs:comment ?abstract }} ORDER BY ?nom'
+		var sparqlQuery ='PREFIX db:<http://fr.dbpedia.org/resource/>PREFIX dbo: <http://dbpedia.org/ontology/>PREFIX dcterms:<http://purl.org/dc/terms/>PREFIX cat:<http://fr.dbpedia.org/resource/Catégorie:>SELECT DISTINCT ?nom,?abstract,?image,?source WHERE { ?auteur dcterms:subject cat:' + sPrix +'.?auteur rdfs:label ?nom.OPTIONAL {?auteur dbo:thumbnail ?image.} OPTIONAL {?auteur foaf:isPrimaryTopicOf ?source} OPTIONAL {?auteur rdfs:comment ?abstract } FILTER (lang(?nom) = "fr") FILTER (lang(?abstract) = "fr")} ORDER BY ?nom' 
+		console.log(sparqlQuery)		
 		var jqxhr = $.ajax({
 			url: 'http://fr.dbpedia.org/sparql/',
 			data: {
